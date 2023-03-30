@@ -47,6 +47,7 @@ class Repository(initData: Data) {
         }
     }
 
+
     // 1.1. Расчет поляризационной модовой дисперсии
     // Поляризационная модовая дисперсия
     fun getPolarizationModeDispersion(): Double =
@@ -56,10 +57,8 @@ class Repository(initData: Data) {
     // Предельное значение коэффициента хроматической дисперсии
     fun getLimitValueChromaticDispersionCoefficient(): Double =
         Data.maximumValueOfZeroDispersionSteepnessRangeWithZeroDispersion *
-                (dataState.value.workingWavelength * 10.0.pow(-3.0) - Data.wavelengthRangeWithZeroDispersionMin.pow(4.0) /
-                        (dataState.value.workingWavelength.pow(
-                            3.0
-                        ) * 10.0.pow(-3.0))) / 4
+                (dataState.value.workingWavelength * 10.0.pow(3.0) - Data.wavelengthRangeWithZeroDispersionMin.pow(4.0) /
+                        ((dataState.value.workingWavelength * 10.0.pow(3.0)).pow(3.0))) / 4
 
     // Значение хроматической дисперсии
     fun getChromaticDispersionValue(): Double = getLimitValueChromaticDispersionCoefficient() *
