@@ -53,12 +53,6 @@ data class SourceSignal(
         }
     }
 
-    //
-//    val minY = power.map { it.second.minOrNull() ?: Double.MAX_VALUE }.minOrNull() ?: 0.0
-//    val maxY = power.map { it.second.maxOrNull() ?: Double.MIN_VALUE }.maxOrNull() ?: 0.0
-//
-//    val minX = distance.map { it.second.minOrNull() ?: Double.MAX_VALUE }.minOrNull() ?: 0.0
-//    val maxX = distance.map { it.second.maxOrNull() ?: Double.MIN_VALUE }.maxOrNull() ?: 0.0
     val minY = power.map { it.second.minOrNull() }.filter { it != null }.minOfOrNull { it!! }
     val maxY = power.map { it.second.maxOrNull() }.filter { it != null }.maxOfOrNull { it!! }
 
@@ -82,7 +76,6 @@ data class SourceSignal(
 @Composable
 @Suppress("MagicNumber")
 fun SourceSignalPlot(sourceSignal: SourceSignal, modifier: Modifier = Modifier, title: String = "Диаграмма уровней") {
-//    val title = "Диаграмма уровней"
     ChartLayout(
         modifier = modifier,
         title = { ChartTitle(title) },
@@ -94,9 +87,9 @@ fun SourceSignalPlot(sourceSignal: SourceSignal, modifier: Modifier = Modifier, 
                 if (sourceSignal.isValid) (sourceSignal.minX!! - (sourceSignal.maxX!! - sourceSignal.minX).absoluteValue * 0.1
                         ..sourceSignal.maxX + (sourceSignal.maxX - sourceSignal.minX).absoluteValue * 0.1)
                 else (0.0..1.0),
-                minimumMajorTickSpacing = 1.dp,
+                minimumMajorTickSpacing = 50.dp,
                 minimumMajorTickIncrement = 1.0,
-                minorTickCount = 3
+                minorTickCount = 1
             ),
             yAxisModel = LinearAxisModel(
                 if (sourceSignal.isValid) (sourceSignal.minY!! - (sourceSignal.maxY!! - sourceSignal.minY).absoluteValue * 0.1
@@ -104,7 +97,7 @@ fun SourceSignalPlot(sourceSignal: SourceSignal, modifier: Modifier = Modifier, 
                 else (0.0..1.0),
                 minimumMajorTickSpacing = 50.dp,
                 minimumMajorTickIncrement = 1.0,
-                minorTickCount = 3
+                minorTickCount = 1
             ),
             xAxisLabels = {
                 AxisLabel(it.toInt().toString(), Modifier.padding(top = 2.dp))

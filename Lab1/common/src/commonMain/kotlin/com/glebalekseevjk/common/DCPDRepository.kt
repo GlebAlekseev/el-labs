@@ -60,57 +60,20 @@ class DCPDRepository(initData: Data) {
                 amplifierAxisX.add(intersectionX)
                 amplifierAxisY.add(intersectionY)
 
-                // добавлениене после усиления
-                amplifierAxisX.add(intersectionX)
-                amplifierAxisY.add(intersectionY + it.receiverGain)
 
-
-                if (amplifierAxisY.last() < it.outputPower) {
-                    val delta = it.outputPower + it.receiverGain - amplifierAxisY.last()
-                    val step = delta / (counterS - 1)
-                    // надо изменить подход
-                    amplifierAxisX.clear()
-                    amplifierAxisY.clear()
-
-                    amplifierAxisX.add(-it.channelLength * .05)
-                    amplifierAxisY.add(it.inputPower.toDouble())
-
-                    amplifierAxisX.add(0.0)
-                    amplifierAxisY.add(it.inputPower.toDouble())
-
-                    amplifierAxisX.add(0.0)
-                    amplifierAxisY.add((it.inputPower + it.transmitterGain).toDouble())
-
-                    var y = (it.interferenceLevel + it.noiseImmunity).toDouble()
-                    counterS = 0
-                    // пока точка пересечение с A не больше L
+                if (intersectionY + it.receiverGain < it.outputPower) {
                     for (i in 0..1000) {
-                        // пересечение прямой y=-аx+lastY и y=A+Pпом
-                        val intersectionX = (y - amplifierAxisY.last()) / -it.attenuation + amplifierAxisX.last()
-                        if (intersectionX > it.channelLength) break
-                        val intersectionY = (y)
-
-                        amplifierAxisX.add(intersectionX)
-                        amplifierAxisY.add(intersectionY)
-                        counterS++
-
-                        // добавлениене после усиления
+                        // добавить усилитель
                         amplifierAxisX.add(intersectionX)
                         amplifierAxisY.add(intersectionY + it.intermediateAmplifiers)
-                        y += step
+
+                        if (amplifierAxisY.last() + it.receiverGain >= it.outputPower) break
                     }
-
-                    val intersectionX = it.channelLength.toDouble()
-                    val intersectionY =
-                        -it.attenuation * (it.channelLength - amplifierAxisX.last()) + amplifierAxisY.last()
-                    amplifierAxisX.add(intersectionX)
-                    amplifierAxisY.add(intersectionY)
-
-                    // добавлениене после усиления
-                    amplifierAxisX.add(intersectionX)
-                    amplifierAxisY.add(intersectionY + it.receiverGain)
                 }
 
+                // добавлениене после усиления
+                amplifierAxisX.add(amplifierAxisX.last())
+                amplifierAxisY.add(amplifierAxisY.last() + it.receiverGain)
 
                 // final
                 amplifierAxisX.add(amplifierAxisX.last() + it.channelLength.toDouble() * .05)
@@ -140,9 +103,6 @@ class DCPDRepository(initData: Data) {
         }
     }
 }
-
-//data class Point(val x: Double, val y: Double)
-
 
 data class ChartsData(
     val amplifierAxis: Axis<Double, Double> = Axis(),
