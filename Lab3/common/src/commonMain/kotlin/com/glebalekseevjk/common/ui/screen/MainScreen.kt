@@ -13,6 +13,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.glebalekseevjk.common.Data
 import com.glebalekseevjk.common.Repository
+import com.glebalekseevjk.common.roundToString
 import com.glebalekseevjk.common.ui.widget.table.TableWidget
 import ui.widget.MainWrapper
 
@@ -165,12 +166,12 @@ fun MainScreen() {
                     TableWidget(
                         listOf(
                             listOf(
-                                "${resultDataState.polarizationModeDispersion}",
-                                "${resultDataState.limitValueChromaticDispersionCoefficient}",
-                                "${resultDataState.chromaticDispersionValue}",
-                                "${resultDataState.resultingDispersion}",
-                                "${resultDataState.bitInterval4}",
-                                "${resultDataState.bitInterval64}",
+                                resultDataState.polarizationModeDispersion.roundToString(),
+                                resultDataState.limitValueChromaticDispersionCoefficient.roundToString(),
+                                resultDataState.chromaticDispersionValue.roundToString(),
+                                resultDataState.resultingDispersion.roundToString(),
+                                resultDataState.bitInterval4.roundToString(),
+                                resultDataState.bitInterval64.roundToString(),
                             ),
                         ),
                         listOf(
@@ -191,12 +192,12 @@ fun MainScreen() {
                     TableWidget(
                         listOf(
                             listOf(
-                                "${resultDataState.maximumPermissibleValueOfPulseBroadening4}",
-                                "${resultDataState.maximumPermissibleValueOfPulseBroadening64}",
-                                "${resultDataState.initialPulseDuration4}",
-                                "${resultDataState.initialPulseDuration64}",
-                                "${resultDataState.endPulseDuration4}",
-                                "${resultDataState.endPulseDuration64}",
+                                resultDataState.maximumPermissibleValueOfPulseBroadening4.roundToString(),
+                                resultDataState.maximumPermissibleValueOfPulseBroadening64.roundToString(),
+                                resultDataState.initialPulseDuration4.roundToString(),
+                                resultDataState.initialPulseDuration64.roundToString(),
+                                resultDataState.endPulseDuration4.roundToString(),
+                                resultDataState.endPulseDuration64.roundToString(),
                             ),
                         ),
                         listOf(
@@ -217,14 +218,14 @@ fun MainScreen() {
                     TableWidget(
                         listOf(
                             listOf(
-                                "${resultDataState.fibreOpticAttenuation}",
+                                resultDataState.fibreOpticAttenuation.roundToString(),
                                 "${resultDataState.isTauNotLongerThanBitInterval4}\n" +
-                                        "${resultDataState.bitInterval4} > ${resultDataState.endPulseDuration4}",
+                                        resultDataState.bitInterval4.roundToString() + ">" + resultDataState.endPulseDuration4.roundToString(),
                                 "${resultDataState.isTauNotLongerThanBitInterval64}\n" +
-                                        "${resultDataState.bitInterval64} > ${resultDataState.endPulseDuration64}",
-                                "${resultDataState.energyBudget}",
+                                        resultDataState.bitInterval64.roundToString() + ">" + resultDataState.endPulseDuration64.roundToString(),
+                                resultDataState.energyBudget.roundToString(),
                                 "${resultDataState.isPositiveEnergyBudget}",
-                                "${resultDataState.maxPossibleDistance}",
+                                resultDataState.maxPossibleDistance.roundToString(),
                             ),
                         ),
                         listOf(
@@ -482,13 +483,13 @@ fun MainScreen() {
                 TableWidget(
                     listOf(
                         listOf(
-                            "${Data.lossesFixedJoints}",
-                            "${Data.lossesDetachableJoints}",
-                            "${Data.exploitationMarginForEquipment}",
-                            "${Data.exploitationMarginForCable}",
+                            Data.lossesFixedJoints.roundToString(),
+                            Data.lossesDetachableJoints.roundToString(),
+                            Data.exploitationMarginForEquipment.roundToString(),
+                            Data.exploitationMarginForCable.roundToString(),
                             "${Data.wavelengthRangeWithZeroDispersionMin} - ${Data.wavelengthRangeWithZeroDispersionMax}",
-                            "${Data.maximumValueOfZeroDispersionSteepnessRangeWithZeroDispersion}",
-                            "${Data.polarizationModeDispersionCoefficient}",
+                            Data.maximumValueOfZeroDispersionSteepnessRangeWithZeroDispersion.roundToString(),
+                            Data.polarizationModeDispersionCoefficient.roundToString(),
                         ),
                     ),
                     listOf(
