@@ -63,7 +63,7 @@ class Repository(initData: Data) {
                             ),
                         )
                     )
-                    if (i / Data.M + 1 == 3) {
+                    if (i % Data.M + 1 == 3) {
                         lastFrequencyUplink = Data.startUplinkFrequencies
                         lastFrequencyDownlink = Data.startDownlinkFrequencies
                     }

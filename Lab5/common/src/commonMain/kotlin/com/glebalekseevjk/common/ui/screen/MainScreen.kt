@@ -343,7 +343,7 @@ fun MainScreen() {
                     listOf(
                         it.numberBSNumberCluster,
                         it.numberFrequencies.joinToString(" - "),
-                        it.downlinkFrequency.map { it.roundToString(2) }.joinToString(" - "),
+                        it.uplinkFrequency.map { it.roundToString(2) }.joinToString(" - "),
                         it.downlinkFrequency.map { it.roundToString(2) }.joinToString(" - "),
                     )
                 },
